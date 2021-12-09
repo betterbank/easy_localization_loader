@@ -6,8 +6,9 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:ui';
 
-import 'asset_loader.dart';
 import 'package:http/http.dart' as http;
+
+import 'asset_loader.dart';
 
 class HttpAssetLoader extends AssetLoader {
   @override
@@ -15,7 +16,7 @@ class HttpAssetLoader extends AssetLoader {
     log('easy localization loader: load http $path');
     try {
       return http
-          .get(path)
+          .get(Uri.parse(path))
           .then((response) => json.decode(response.body.toString()));
     } catch (e) {
       //Catch network exceptions
